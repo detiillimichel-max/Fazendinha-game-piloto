@@ -1,3 +1,4 @@
+/* js/modules/ui.js UPDATED - Lógica Visual Jogo */
 export const ui = {
     init(state) {
         this.state = state;
@@ -6,15 +7,31 @@ export const ui = {
         this.farmGrid = document.getElementById('farm-grid');
         this.storeItems = document.getElementById('store-items');
         this.inventoryDisplay = document.getElementById('inventory-display');
+        this.actionButtons = document.querySelectorAll('.action-btn[data-action]');
         this.render();
     },
 
     render() {
         this.dayDisplay.textContent = `Dia ${this.state.farm.day}`;
-        this.moneyDisplay.textContent = `Dinheiro: $${this.state.store.money}`;
+        this.moneyDisplay.textContent = `$${this.state.store.money}`; // Simbolo curto
         this.renderFarm();
         this.renderStore();
         this.renderInventory();
+    },
+
+    // Novo: Atualiza o feedback visual do botão orbital selecionado
+    updateActiveActionButton(activeAction) {
+        this.actionButtons.forEach(btn => {
+            if (btn.dataset.action === activeAction) {
+                // Destaca o botão selecionado
+                btn.style.background = 'var(--accent-color)';
+                btn.style.color = 'white';
+            } else {
+                // Reseta os outros
+                btn.style.background = 'white';
+                btn.style.color = 'var(--accent-color)';
+            }
+        });
     },
 
     renderFarm() {
@@ -24,9 +41,24 @@ export const ui = {
             div.className = 'plot';
             div.dataset.index = index;
             
-            if (plot.state === 'empty') div.textContent = '';
-            if (plot.state === 'planted') div.textContent = plot.watered ? '💦' : '🌱';
-            if (plot.state === 'ready') div.textContent = '🌾';
+            // Aplica a classe de TERRA MOLHADA do CSS
+            if (plot.watered) {
+                div.classList.add('watered');
+            }
+
+            // Define o ícone da planta com base no estado
+            if (plot.state === 'empty') {
+                 // Canteiro vazio (apenas terra)
+            }
+            if (plot.state === 'planted') {
+                div.textContent = '🌱'; // Brotinho
+            }
+            if (plot.state === 'ready') {
+                // Melhor: Usa ícone diferente para cada colheita
+                if (plot.crop === 'milho') div.textContent = '🌽';
+                if (plot.crop === 'trigo') div.textContent = '🌾';
+                if (plot.crop === 'soja')  div.textContent = '🌿';
+            }
             
             this.farmGrid.appendChild(div);
         });
@@ -36,8 +68,12 @@ export const ui = {
         this.storeItems.innerHTML = '';
         Object.entries(this.state.store.prices).forEach(([item, price]) => {
             let btn = document.createElement('button');
-            btn.className = 'store-btn action-btn';
-            btn.textContent = `Comprar ${item} ($${price})`;
+            btn.className = 'store-btn';
+            
+            // Capitaliza a primeira letra
+            let itemName = item.charAt(0).toUpperCase() + item.slice(1);
+            
+            btn.textContent = `Comprar ${itemName} ($${price})`;
             btn.dataset.item = item;
             this.storeItems.appendChild(btn);
         });
