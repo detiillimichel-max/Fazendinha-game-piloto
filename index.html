@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minha Fazenda Completa 🌾</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Fazenda - OIO</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Minha Fazenda 🌱</h1>
-  <p id="day">Dia 1 - Manhã</p>
-  <p id="money">Dinheiro: $100</p>
+    <div class="glass-container">
+        <header class="game-header">
+            <h1>Minha Fazenda 🌱</h1>
+            <div class="status-bar">
+                <span id="day-display">Dia 1</span>
+                <span id="money-display">Dinheiro: $60</span>
+            </div>
+        </header>
 
-  <div id="farm">
-    <div class="field" id="field1"></div>
-    <div class="field" id="field2"></div>
-    <div class="field" id="field3"></div>
-    <div class="field" id="field4"></div>
-    <div class="field" id="field5"></div>
-  </div>
+        <main class="game-board">
+            <section class="farm-grid" id="farm-grid">
+                </section>
 
-  <div id="actions">
-    <button onclick="plantSeed()">🌱 Plantar</button>
-    <button onclick="waterPlants()">💧 Regar</button>
-    <button onclick="harvestPlants()">🌾 Colher</button>
-    <button onclick="nextDay()">⏭ Próximo Dia</button>
-  </div>
+            <section class="action-controls">
+                <button class="action-btn" id="btn-plant" data-action="plant">🌱 Plantar</button>
+                <button class="action-btn" id="btn-water" data-action="water">💧 Regar</button>
+                <button class="action-btn" id="btn-harvest" data-action="harvest">🌾 Colher</button>
+                <button class="action-btn primary" id="btn-next-day">⏭ Próximo Dia</button>
+            </section>
 
-  <div id="shop">
-    <h2>Loja</h2>
-    <button onclick="buySeed('milho')">Comprar Semente de Milho ($10)</button>
-    <button onclick="buySeed('trigo')">Comprar Semente de Trigo ($15)</button>
-    <button onclick="buySeed('soja')">Comprar Semente de Soja ($20)</button>
-    <p id="inventory">Inventário: Nenhuma semente</p>
-  </div>
+            <section class="dashboard-panel">
+                <div class="store-section">
+                    <h2>Loja de Sementes</h2>
+                    <div id="store-items" class="store-grid">
+                        </div>
+                </div>
 
-  <p id="status">Bem-vindo à sua fazenda!</p>
+                <div class="inventory-section">
+                    <h2>Mochila</h2>
+                    <p id="inventory-display">Vazio</p>
+                </div>
+            </section>
+        </main>
+    </div>
 
-  <script src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
