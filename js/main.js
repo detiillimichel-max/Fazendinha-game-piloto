@@ -1,3 +1,4 @@
+/* js/main.js UPDATED - Motor Conectado ao Visual */
 import { farm } from './modules/farm.js';
 import { store } from './modules/store.js';
 import { inventory } from './modules/inventory.js';
@@ -16,13 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', (e) => {
             currentAction = e.target.dataset.action;
             
-            // Feedback visual de qual botão está ativo
-            actionButtons.forEach(b => {
-                b.style.background = 'rgba(255, 255, 255, 0.9)';
-                b.style.color = 'var(--text-main)';
-            });
-            e.target.style.background = 'var(--accent-color)';
-            e.target.style.color = 'white';
+            // Update visual feedback (New method in ui.js)
+            ui.updateActiveActionButton(currentAction);
         });
     });
 
@@ -52,10 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ui.render(); // Atualiza a tela após a ação
     });
 
-    // Loja de Sementes
+    // Loja de Sementes - Bugfix para cliques nos itens
     document.getElementById('store-items').addEventListener('click', (e) => {
-        if (e.target.tagName === 'BUTTON') {
-            let item = e.target.dataset.item;
+        // Encontra o botão que foi clicado, mesmo se clicou no texto dentro dele
+        let storeBtn = e.target.closest('.store-btn');
+        if (storeBtn) {
+            let item = storeBtn.dataset.item;
             if (!store.buySeed(item)) {
                 alert('Dinheiro insuficiente!');
             }
