@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Fazenda Completa 🌾</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Minha Fazenda 🌱</h1>
+  <p id="day">Dia 1 - Manhã</p>
+  <p id="money">Dinheiro: $100</p>
+
+  <div id="farm">
+    <div class="field" id="field1"></div>
+    <div class="field" id="field2"></div>
+    <div class="field" id="field3"></div>
+    <div class="field" id="field4"></div>
+    <div class="field" id="field5"></div>
+  </div>
+
+  <div id="actions">
+    <button onclick="plantSeed()">🌱 Plantar</button>
+    <button onclick="waterPlants()">💧 Regar</button>
+    <button onclick="harvestPlants()">🌾 Colher</button>
+    <button onclick="nextDay()">⏭ Próximo Dia</button>
+  </div>
+
+  <div id="shop">
+    <h2>Loja</h2>
+    <button onclick="buySeed('milho')">Comprar Semente de Milho ($10)</button>
+    <button onclick="buySeed('trigo')">Comprar Semente de Trigo ($15)</button>
+    <button onclick="buySeed('soja')">Comprar Semente de Soja ($20)</button>
+    <p id="inventory">Inventário: Nenhuma semente</p>
+  </div>
+
+  <p id="status">Bem-vindo à sua fazenda!</p>
+
+  <script src="script.js"></script>
+</body>
+</html>
